@@ -48,29 +48,30 @@ export default class ImageViewer extends React.Component<Props, State> {
 
   private imageRefs: any[] = [];
 
-  public componentWillMount() {
+  public componentDidMount() {
     this.init(this.props);
   }
 
-  public componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.index !== this.state.currentShowIndex) {
-      this.setState(
-        {
-          currentShowIndex: nextProps.index
-        },
-        () => {
-          // 立刻预加载要看的图
-          this.loadImage(nextProps.index || 0);
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+    if (nextProps.index !== prevState.prevIndexProp) {
+      return { currentShowIndex: nextProps.index, prevIndexProp: nextProps.index };
+    }
+    return null;
+  }
 
-          this.jumpToCurrentImage();
+  public componentDidUpdate(prevProps: Props, prevState: State) {
+    if (prevProps.index !== this.props.index) {
+      // 立刻预加载要看的图
+      this.loadImage(this.props.index || 0);
 
-          // 显示动画
-          Animated.timing(this.fadeAnim, {
-            toValue: 1,
-            duration: 200
-          }).start();
-        }
-      );
+      this.jumpToCurrentImage();
+
+      // 显示动画
+      Animated.timing(this.fadeAnim, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: !!this.props.useNativeDriver
+      }).start();
     }
   }
 
@@ -97,6 +98,7 @@ export default class ImageViewer extends React.Component<Props, State> {
     this.setState(
       {
         currentShowIndex: nextProps.index,
+        prevIndexProp: nextProps.index || 0,
         imageSizes
       },
       () => {
@@ -108,7 +110,8 @@ export default class ImageViewer extends React.Component<Props, State> {
         // 显示动画
         Animated.timing(this.fadeAnim, {
           toValue: 1,
-          duration: 200
+          duration: 200,
+          useNativeDriver: !!nextProps.useNativeDriver
         }).start();
       }
     );
@@ -326,7 +329,8 @@ export default class ImageViewer extends React.Component<Props, State> {
     this.standardPositionX = this.positionXNumber;
     Animated.timing(this.positionX, {
       toValue: this.positionXNumber,
-      duration: this.props.pageAnimateTime
+      duration: this.props.pageAnimateTime,
+      useNativeDriver: !!this.props.useNativeDriver
     }).start();
 
     const nextIndex = (this.state.currentShowIndex || 0) - 1;
@@ -359,7 +363,8 @@ export default class ImageViewer extends React.Component<Props, State> {
     this.standardPositionX = this.positionXNumber;
     Animated.timing(this.positionX, {
       toValue: this.positionXNumber,
-      duration: this.props.pageAnimateTime
+      duration: this.props.pageAnimateTime,
+      useNativeDriver: !!this.props.useNativeDriver
     }).start();
 
     const nextIndex = (this.state.currentShowIndex || 0) + 1;
@@ -383,7 +388,8 @@ export default class ImageViewer extends React.Component<Props, State> {
     this.positionXNumber = this.standardPositionX;
     Animated.timing(this.positionX, {
       toValue: this.standardPositionX,
-      duration: 150
+      duration: 150,
+      useNativeDriver: !!this.props.useNativeDriver
     }).start();
   }
 
@@ -591,6 +597,8 @@ export default class ImageViewer extends React.Component<Props, State> {
               pinchToZoom={this.props.enableImageZoom && !this.state.isShowMenu}
               enableDoubleClickZoom={this.props.enableImageZoom && !this.state.isShowMenu}
               doubleClickInterval={this.props.doubleClickInterval}
+              minScale={this.props.minScale}
+              maxScale={this.props.maxScale}
             >
               {this!.props!.renderImage!(image.props)}
             </ImageZoom>
