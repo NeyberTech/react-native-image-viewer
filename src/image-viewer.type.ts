@@ -2,6 +2,14 @@ import * as React from 'react';
 import { Image, ImageURISource, Text, View, ViewStyle } from 'react-native';
 import { simpleStyle } from './image-viewer.style';
 
+interface IOnMove {
+  type: string;
+  positionX: number;
+  positionY: number;
+  scale: number;
+  zoomCurrentDistance: number;
+}
+
 export class Props {
   /**
    * 是否显示
@@ -93,7 +101,7 @@ export class Props {
   /**
    * 单击回调
    */
-   public onClick?:  (close?: () => any, currentShowIndex?: number) => void = () => {
+  public onClick?: (close?: () => any, currentShowIndex?: number) => void = () => {
     //
   };
 
@@ -112,6 +120,10 @@ export class Props {
     //
   };
 
+  public onMove?: (position?: IOnMove) => void = () => {
+    //
+  };
+
   /**
    * 自定义头部
    */
@@ -122,7 +134,7 @@ export class Props {
   /**
    * 自定义尾部
    */
-  public renderFooter?: (currentIndex?: number) => React.ReactElement<any> = () => {
+  public renderFooter?: (currentIndex: number) => React.ReactElement<any> = () => {
     return null as any;
   };
 
@@ -225,6 +237,7 @@ export class Props {
    * 设置内容高度
    */
   public contentWidth?: number = 0;
+  public menus?: ({ cancel, saveToLocal }: any) => React.ReactElement<any>;
 }
 
 export class State {
