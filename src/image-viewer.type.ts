@@ -228,7 +228,9 @@ export class Props {
     //
   };
 
-  /**
+  public menus?: ({ cancel, saveToLocal }: any) => React.ReactElement<any>;
+
+    /**
    * 图片加载展示自定义
    */
   public loadingWithBlur?: boolean = false;
@@ -250,7 +252,6 @@ export class Props {
    * 设置内容高度
    */
   public contentWidth?: number = 0;
-  public menus?: ({ cancel, saveToLocal }: any) => React.ReactElement<any>;
 }
 
 export class State {
