@@ -5,7 +5,7 @@
   "main": "built/index.js",
   "types": "built/index.d.ts",
   "scripts": {
-    "prepare": "rm -rf built",
+    "prepare": "rm -rf built && tsc",
     "start": "tsc -w --outDir demo/built"
   },
   "repository": {
@@ -18,7 +18,7 @@
   "author": "ascoders",
   "license": "MIT",
   "dependencies": {
-    "react-native-image-pan-zoom": "^2.1.9"
+    "react-native-image-pan-zoom": "git+https://git@github.com/NeyberTech/react-native-image-zoom.git#48265d0"
   },
   "peerDependencies": {
     "react": "*",
