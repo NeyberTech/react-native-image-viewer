@@ -593,7 +593,6 @@ export default class ImageViewer extends React.Component<Props, State> {
               pinchToZoom={this.props.enableImageZoom}
               enableDoubleClickZoom={this.props.enableImageZoom}
               doubleClickInterval={this.props.doubleClickInterval}
-              renderIndicator={() => (<></>)}
             >
               {this!.props!.renderImage!(image.props)}
             </ImageZoom>
@@ -665,7 +664,6 @@ export default class ImageViewer extends React.Component<Props, State> {
               pinchToZoom={this.props.enableImageZoom}
               enableDoubleClickZoom={this.props.enableImageZoom}
               doubleClickInterval={this.props.doubleClickInterval}
-              renderIndicator={() => (<></>)}
             >
               {this!.props!.renderLoadingWithBlur!(loadingWithBlurProps)}
             </ImageZoom>
