@@ -121,6 +121,10 @@ export default class ImageViewer extends React.Component<Props, State> {
   public resetImageByIndex = (index: number) => {
     this.imageRefs[index] && this.imageRefs[index].reset();
   };
+
+  public onMoveCompensate = (index: number) => {
+    this.imageRefs[index] && this.imageRefs[index].imageDidMove();
+  };
   /**
    * 调到当前看图位置
    */
@@ -341,6 +345,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       () => {
         if (this.props.onChange) {
           this.props.onChange(this.state.currentShowIndex);
+          this.onMoveCompensate(nextIndex);
         }
       }
     );
@@ -375,6 +380,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       () => {
         if (this.props.onChange) {
           this.props.onChange(this.state.currentShowIndex);
+          this.onMoveCompensate(nextIndex);
         }
       }
     );
@@ -593,6 +599,7 @@ export default class ImageViewer extends React.Component<Props, State> {
               pinchToZoom={this.props.enableImageZoom}
               enableDoubleClickZoom={this.props.enableImageZoom}
               doubleClickInterval={this.props.doubleClickInterval}
+              onMove={this.props.onMove}
             >
               {this!.props!.renderImage!(image.props)}
             </ImageZoom>
@@ -664,6 +671,7 @@ export default class ImageViewer extends React.Component<Props, State> {
               pinchToZoom={this.props.enableImageZoom}
               enableDoubleClickZoom={this.props.enableImageZoom}
               doubleClickInterval={this.props.doubleClickInterval}
+              onMove={this.props.onMove}
             >
               {this!.props!.renderLoadingWithBlur!(loadingWithBlurProps)}
             </ImageZoom>

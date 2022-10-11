@@ -104,6 +104,10 @@ export class Props {
     //
   };
 
+  public onMove?: (close?: () => any) => void = () => {
+    //
+  };
+
   /**
    * 图片保存到本地方法，如果写了这个方法，就不会调取系统默认方法
    * 针对安卓不支持 saveToCameraRoll 远程图片，可以在安卓调用此回调，调用安卓原生接口
