@@ -640,13 +640,7 @@ export default class ImageViewer extends React.Component<Props, State> {
           };
 
           const loadingWithBlurProps = {
-            source: {
-              uri: image.url,
-            },
-            loadingSource: {
-              uri: image.loadingUrl,
-            },
-            style: image.props.style,
+            source: image,
           }
           if (this.props.enablePreload) {
             this.preloadImage(this.state.currentShowIndex||0)
