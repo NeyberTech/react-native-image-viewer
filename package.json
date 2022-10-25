@@ -18,7 +18,7 @@
   "author": "ascoders",
   "license": "MIT",
   "dependencies": {
-    "react-native-image-pan-zoom": "git+https://git@github.com/NeyberTech/react-native-image-zoom#cdc1f83"
+    "react-native-image-pan-zoom": "git+https://git@github.com/NeyberTech/react-native-image-zoom#48265d0"
     
   },
   "peerDependencies": {
