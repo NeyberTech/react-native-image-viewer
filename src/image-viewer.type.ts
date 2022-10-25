@@ -2,6 +2,14 @@ import * as React from 'react';
 import { Image, ImageURISource, Text, View, ViewStyle } from 'react-native';
 import { simpleStyle } from './image-viewer.style';
 
+export interface IOnMove {
+  type: string;
+  positionX: number;
+  positionY: number;
+  scale: number;
+  zoomCurrentDistance: number;
+}
+
 export class Props {
   /**
    * 是否显示
@@ -104,7 +112,10 @@ export class Props {
     //
   };
 
-  public onMove?: (close?: () => any) => void = () => {
+  /**
+   * If provided, this will be called everytime the map is moved
+   */
+   public onMove?: (position: IOnMove) => void = () => {
     //
   };
 
