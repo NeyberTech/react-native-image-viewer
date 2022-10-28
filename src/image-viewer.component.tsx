@@ -48,6 +48,8 @@ export default class ImageViewer extends React.Component<Props, State> {
 
   private imageRefs: any[] = [];
 
+  private currentScale = 1;
+
   public componentWillMount() {
     this.init(this.props);
   }
@@ -440,6 +442,14 @@ export default class ImageViewer extends React.Component<Props, State> {
     }
   };
 
+  public onMove = (event) => {
+    const { scale } = event;
+    this.currentScale = scale;
+    if (this.props.onMove) {
+      this.props.onMove(event);
+    }
+  }
+
   /**
    * 完成布局
    */
@@ -665,7 +675,7 @@ export default class ImageViewer extends React.Component<Props, State> {
               pinchToZoom={this.props.enableImageZoom}
               enableDoubleClickZoom={this.props.enableImageZoom}
               doubleClickInterval={this.props.doubleClickInterval}
-              onMove={this.props.onMove}
+              onMove={this.onMove}
             >
               {this!.props!.renderLoadingWithBlur!(loadingWithBlurProps)}
             </ImageZoom>
