@@ -442,7 +442,7 @@ export default class ImageViewer extends React.Component<Props, State> {
     }
   };
 
-  public onMove = (event) => {
+  public onMove = (event: any) => {
     const { scale } = event;
     this.currentScale = scale;
     if (this.props.onMove) {
