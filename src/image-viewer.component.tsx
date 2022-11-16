@@ -15,6 +15,7 @@ import {
   View,
   ViewStyle
 } from 'react-native';
+// @ts-ignore
 import ImageZoom from 'react-native-image-pan-zoom';
 import styles from './image-viewer.style';
 import { IImageInfo, IImageSize, Props, State } from './image-viewer.type';
@@ -592,6 +593,7 @@ export default class ImageViewer extends React.Component<Props, State> {
           return (
             <ImageZoom
               key={index}
+              // @ts-ignore
               ref={el => (this.imageRefs[index] = el)}
               cropWidth={this.width}
               cropHeight={this.height}
@@ -661,6 +663,7 @@ export default class ImageViewer extends React.Component<Props, State> {
           return (
             <ImageZoom
               key={index}
+              // @ts-ignore
               ref={el => (this.imageRefs[index] = el)}
               cropWidth={this.width}
               cropHeight={this.height}
