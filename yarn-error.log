@@ -33,7 +33,6 @@ npm manifest:
     "license": "MIT",
     "dependencies": {
       "nt-transmit-transparently": "^1.0.7",
-      "react-native-image-pan-zoom": "^2.0.15"
     },
     "peerDependencies": {
       "react": "*",
