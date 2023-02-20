@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {
   Animated,
-  CameraRoll,
   Dimensions,
   I18nManager,
   Image,
@@ -739,13 +738,7 @@ export default class ImageViewer extends React.Component<Props, State> {
    * 保存当前图片到本地相册
    */
   public saveToLocal = () => {
-    if (!this.props.onSave) {
-      CameraRoll.saveToCameraRoll(this.props.imageUrls[this.state.currentShowIndex || 0].url);
-      this!.props!.onSaveToCamera!(this.state.currentShowIndex);
-    } else {
-      this.props.onSave(this.props.imageUrls[this.state.currentShowIndex || 0].url);
-    }
-
+   
     this.setState({ isShowMenu: false });
   };
 
